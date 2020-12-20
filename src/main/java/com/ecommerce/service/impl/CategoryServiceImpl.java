@@ -27,10 +27,10 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-
     @Override
     public List<CategoryDTO> getCategoryList() {
-        return categoryMapper.toDTOList(categoryRepository.findAll());
+        List<Category> categories = categoryRepository.findAll();
+        return categoryMapper.toDTOList(categories);
     }
 
     @PostConstruct

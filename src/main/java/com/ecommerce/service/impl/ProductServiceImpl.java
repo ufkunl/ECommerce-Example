@@ -6,10 +6,13 @@ import com.ecommerce.mapper.ProductMapper;
 import com.ecommerce.repository.ProductRepository;
 import com.ecommerce.service.ProductService;
 import com.ecommerce.util.ProductUtil;
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -19,18 +22,15 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductMapper productMapper;
 
-    private final ProductUtil productUtil;
-
     public ProductServiceImpl(ProductRepository productRepository,ProductMapper productMapper,ProductUtil productUtil) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
-        this.productUtil = productUtil;
     }
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) {
         Product product = productMapper.toEntity(productDTO);
-        product.setCode(productUtil.generateProductCode());
+        product.setCode(ProductUtil.generateProductCode());
         product = productRepository.save(product);
         return productMapper.toDTO(product);
     }
@@ -45,10 +45,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Long productId) {
+    public void deleteProduct(Long productId) throws EntityNotFoundException {
         Product productFromDb = productRepository.findById(productId)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found"));
         productRepository.delete(productFromDb);
+    }
+
+    @Override
+    public List<ProductDTO> getProductListByCategoryId(Long categoryId) {
+        List<Product> productList = productRepository.findByCategoryId(categoryId)
+                .orElse(new ArrayList<>());
+        return productMapper.toDTOList(productList);
     }
 
 
