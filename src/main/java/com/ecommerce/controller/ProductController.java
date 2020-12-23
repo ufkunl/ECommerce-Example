@@ -1,14 +1,19 @@
 package com.ecommerce.controller;
 
 import com.ecommerce.dto.ProductDTO;
-import com.ecommerce.entity.Product;
+import com.ecommerce.exception.ProductNotFound;
 import com.ecommerce.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
+
+/**
+ * @developer -- ufukunal
+ */
 
 @RestController
 @RequestMapping("/product")
@@ -20,9 +25,15 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @ApiOperation(value = "lists all category list",
+    /**
+     * Endpoint that creating a product
+     *
+     * @param productDTO
+     * @return
+     */
+    @ApiOperation(value = "creating product",
             notes = "",
-            responseContainer = "get all category list",
+            responseContainer = "create product",
             response = ResponseEntity.class)
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -30,29 +41,53 @@ public class ProductController {
         return productService.createProduct(productDTO);
     }
 
-    @ApiOperation(value = "lists all category list",
+    /**
+     * Endpoint that updating a product
+     *
+     * @param productDTO
+     * @return
+     * @throws ProductNotFound
+     *
+     */
+    @ApiOperation(value = "updating product by id",
             notes = "",
-            responseContainer = "get all category list",
+            responseContainer = "update a product",
             response = ResponseEntity.class)
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    public ProductDTO updateProduct(@Valid @RequestBody ProductDTO productDTO){
+    public ProductDTO updateProduct(@Valid @RequestBody ProductDTO productDTO) throws ProductNotFound {
         return productService.updateProduct(productDTO);
     }
 
-    @ApiOperation(value = "lists all category list",
+    /**
+     * Endpoint that deleting a product
+     *
+     * @param productId
+     * @return
+     * @throws ProductNotFound
+     *
+     */
+    @ApiOperation(value = "deleting product by id",
             notes = "",
-            responseContainer = "get all category list",
+            responseContainer = "delete a product",
             response = ResponseEntity.class)
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("{productId}")
-    public void deleteProduct(@PathVariable Long productId){
+    @DeleteMapping("/{productId}")
+    public void deleteProduct(@PathVariable Long productId) throws ProductNotFound {
         productService.deleteProduct(productId);
     }
 
-    @ApiOperation(value = "lists all category list",
+    /**
+     * Endpoint that listing product list by category
+     *
+     * @param categoryId
+     * @return
+     * @throws
+     *
+     */
+    @ApiOperation(value = "listing product list by category",
             notes = "",
-            responseContainer = "get all category list",
+            responseContainer = "list products",
             response = ResponseEntity.class)
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/by-category/{categoryId}")

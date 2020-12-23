@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @developer -- ufukunal
+ */
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
 

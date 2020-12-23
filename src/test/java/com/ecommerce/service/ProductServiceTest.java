@@ -4,6 +4,7 @@ import com.ecommerce.dto.CategoryDTO;
 import com.ecommerce.dto.ProductDTO;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Product;
+import com.ecommerce.exception.ProductNotFound;
 import com.ecommerce.mapper.ProductMapper;
 import com.ecommerce.repository.ProductRepository;
 import com.ecommerce.service.impl.ProductServiceImpl;
@@ -65,8 +66,8 @@ public class ProductServiceTest {
         Assert.assertEquals(emptyListDTO, productService.getProductListByCategoryId(categoryId));
     }
 
-    @Test(expected = EntityNotFoundException.class)
-    public void should_get_product_not_found_exception_in_delete() {
+    @Test(expected = ProductNotFound.class)
+    public void should_get_product_not_found_exception_in_delete() throws ProductNotFound {
         when(productRepository.findById(1L)).thenReturn(Optional.of(createProduct()));
         productService.deleteProduct(1L);
         Assert.assertTrue(true);

@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @developer -- ufukunal
+ */
+
 @RestController
 @RequestMapping("/category")
 @Slf4j
@@ -22,9 +26,9 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @ApiOperation(value = "lists all category list",
+    @ApiOperation(value = "listing all category list",
             notes = "",
-            responseContainer = "get all category list",
+            responseContainer = "list categories",
             response = ResponseEntity.class)
     @ResponseStatus(HttpStatus.OK)
     @GetMapping

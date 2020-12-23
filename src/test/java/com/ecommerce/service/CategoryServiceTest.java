@@ -8,13 +8,14 @@ import com.ecommerce.mapper.CategoryMapper;
 import com.ecommerce.repository.CategoryRepository;
 import com.ecommerce.service.impl.CategoryServiceImpl;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
@@ -29,6 +30,11 @@ public class CategoryServiceTest {
     @Mock
     private CategoryMapper categoryMapper;
 
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
     public void should_get_empty_category_list() {
         List<Category> emptyList = new ArrayList<>();
@@ -39,8 +45,6 @@ public class CategoryServiceTest {
 
         Assert.assertEquals(emptyListDTO, categoryService.getCategoryList());
     }
-
-
 
     private Category createCategory(){
         Category category = new Category();

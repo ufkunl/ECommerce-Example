@@ -3,11 +3,12 @@ package com.ecommerce.util;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
+/**
+ * @developer -- ufukunal
+ */
 
 @Component
 public class ProductUtil {
-
 
     /**
      * provide unique code for new product
