@@ -1,7 +1,7 @@
 # E-COMMERCE
 
 # Description and Tech Stack
-This project has been created for a e-commerce whose name is Trendyol. Admin will manage products and catogories. Customer will view products by category and categories.
+This project has been created for an e-commerce whose name is Trendyol. Admin will manage products and catogories. Customer will view products by category and categories.
 
 You should be able to start the example application by executing com.ecommerce.ECommerceApplication,
 which starts a webserver on port 8080 (http://localhost:8080) and serves SwaggerUI where can inspect and try existing endpoints.
@@ -44,7 +44,7 @@ request:
     "price":90.50
 }
 
-Admin can create product. Generates product code which random number and alphanumeric 
+Admin can create product. Generates product code which random number with alphanumeric 
 
 ## /product
 method: PUT
